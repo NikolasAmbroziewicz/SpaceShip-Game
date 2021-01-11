@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alien Invasion</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="root move">
+      <div class="container" data-container></div>
+      <div class="spaceship hide spaceship-move-left" data-ship></div>
+      <section class="information">
+        <article class="information__content hide" data-score>Score: 0</article>
+        <article class="information__content hide" data-level>Level: 1</article>
+        <article class="information__content hide" data-lives>Lives: 3</article>
+      </section>
+      <span class="information__level hide" data-start-number
+        >Are you ready?</span
+      >
+      <div class="modal">
+        <div class="modal__content" data-modal>
+          <p class="text__modal">Welcome in Alien Invasion</p>
+          <button class="modal__button" data-modal-button>New Game!</button>
+        </div>
+      </div>
+    </div>
+    <script src="Scripts/Game.js" type="module"></script>
+  </body>
+</html>

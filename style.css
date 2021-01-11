@@ -1,0 +1,319 @@
+/* General Style */
+:root {
+  --primary-color: #09fcfd;
+  --basic-size: 64px;
+  --animation-duration: 600ms;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  overflow: hidden;
+}
+
+div.root {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-image: url("./images/background.jpg");
+}
+
+div.root.meteor {
+  animation: meteors-bgc 150ms ease-in-out infinite;
+}
+
+div.root.move {
+  animation: skyMove calc(var(--animation-duration) * 6) linear infinite;
+}
+
+section.information {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+span.information__level {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 100px;
+  width: 100vw;
+  background-color: #fff;
+  opacity: 0.6;
+  width: 100%;
+  text-align: center;
+  line-height: 100px;
+  font-size: 50px;
+  color: var(--primary-color);
+}
+
+div.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.modal .modal__content {
+  font-size: 30px;
+  line-height: 120px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--primary-color);
+  text-shadow: 0 0 6px var(--primary-color);
+}
+
+.modal .modal__button {
+  width: 200px;
+  height: 100px;
+  border: 2px solid var(--primary-color);
+  background-color: transparent;
+  color: var(--primary-color);
+  outline: none;
+  border-radius: 15px;
+}
+
+.modal .modal__button:hover {
+  box-shadow: 0 0 15px 5px var(--primary-color);
+}
+
+/* Game Object Settings */
+
+.spaceship {
+  position: fixed;
+  width: var(--basic-size);
+  height: var(--basic-size);
+  background-size: cover;
+  background-image: url("./images/ship.png");
+  animation: ship-8-move var(--animation-duration) steps(8) infinite;
+}
+
+.alien-lv-1 {
+  position: fixed;
+  left: 10px;
+  top: 20px;
+  width: calc(var(--basic-size) / 1.2);
+  height: calc(var(--basic-size) / 1.1);
+  background-image: url("./images/enemy-1.png");
+  background-position: cover;
+  animation: ship-5-move var(--animation-duration) steps(5) infinite;
+  z-index: 2;
+}
+
+.alien-lv-2 {
+  position: fixed;
+  width: calc(var(--basic-size) * 2);
+  height: calc(var(--basic-size) * 2);
+  background-image: url("./images/enemy-2.png");
+  background-position: center;
+  animation: ship-16-big-move var(--animation-duration) steps(8) infinite;
+}
+
+.alien-lv-3 {
+  position: fixed;
+  top: 30px;
+  left: 100px;
+  width: calc(var(--basic-size) * 1.1);
+  height: calc(var(--basic-size) * 1.1);
+  border-radius: 50%;
+  background-position: center;
+  background-image: url("./images/enemy-3.png");
+  animation: rotate-lv-3 calc(var(--animation-duration) * 3) linear infinite;
+}
+
+.boss {
+  position: fixed;
+  width: 192px;
+  height: 110px;
+  background-size: cover;
+  border: 1px solid green;
+  border-radius: 50% 50% 25% 25%;
+  background-image: url("./images/boss.png");
+  animation: boss-animation calc(var(--animation-duration) * 3) linear infinite
+    alternate;
+}
+
+.meteors {
+  position: fixed;
+  width: calc(var(--basic-size) / 2);
+  height: calc(var(--basic-size) / 2);
+  background-position: center;
+  background-image: url("./images/asteroids.png");
+  animation: rotate-lv-3 calc(var(--animation-duration) * 3) linear infinite,
+    move calc(var(--animation-duration) * 6) ease-in infinite;
+}
+
+/* explosion */
+
+.explosion {
+  position: fixed;
+  width: var(--basic-size);
+  height: var(--basic-size);
+  background-image: url("./images/explosion.png");
+  animation: small-explosion calc(var(--animation-duration) * 2) steps(17)
+    infinite;
+}
+
+.explosion-big {
+  position: fixed;
+  width: calc(var(--basic-size) * 2);
+  height: calc(var(--basic-size) * 2);
+  background-image: url("./images/explosion-big.png");
+  animation: big-explosion calc(var(--animation-duration) * 4) steps(17)
+    infinite;
+}
+
+/* Missiles */
+
+.missile-ship {
+  position: fixed;
+  width: 18px;
+  height: 24px;
+  background-image: url("./images/rocket.png");
+  background-size: cover;
+}
+
+.missile-alien {
+  position: fixed;
+  width: 24px;
+  height: 36px;
+  background-image: url("./images/enemyMissile.png");
+  background-size: cover;
+  transform: rotate(180deg);
+}
+
+.missile-boss {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-image: url("./images/Boss-missile.png");
+  background-position: center;
+  animation: rotate-lv-3 1s linear infinite;
+}
+
+/* Animation */
+
+@keyframes skyMove {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: 512px;
+  }
+}
+
+@keyframes ship-8-move {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: calc(var(--basic-size) * -8);
+  }
+}
+
+@keyframes ship-5-move {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: calc(var(--basic-size) * -5);
+  }
+}
+
+@keyframes ship-16-big-move {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: calc(var(--basic-size) * -16);
+  }
+}
+
+@keyframes small-explosion {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: calc(var(--basic-size) * -17);
+  }
+}
+
+@keyframes big-explosion {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: calc(var(--basic-size) * -34);
+  }
+}
+
+@keyframes rotate-lv-3 {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes boss-animation {
+  0% {
+    width: 192px;
+    height: 100px;
+  }
+  100% {
+    width: 210px;
+    height: 120px;
+  }
+}
+
+@keyframes meteors-bgc {
+  0% {
+    background-position-x: 0;
+    background-position-y: 0;
+  }
+  25% {
+    background-position-x: 10px;
+    background-position-y: 10px;
+  }
+  50% {
+    background-position-x: 0;
+  }
+  75% {
+    background-position-x: -10px;
+    background-position-y: -10px;
+  }
+  100% {
+    background-position-x: 0;
+  }
+}
+
+.hit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #510303;
+}
+
+.hide {
+  display: none;
+}
