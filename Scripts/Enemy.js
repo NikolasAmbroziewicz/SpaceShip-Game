@@ -1,9 +1,10 @@
 export class Enemy {
-  constructor(container, enemyClass, explosionClass, lives = 1) {
+  constructor(container, enemyClass, explosionClass, enemyInterval, lives = 1) {
     this.container = container;
     this.enemyClass = enemyClass;
-    this.lives = lives;
     this.explosionClass = explosionClass;
+    this.enemyInterval = enemyInterval;
+    this.lives = lives;
     this.element = document.createElement("div");
     this.interval = null;
   }
@@ -27,7 +28,10 @@ export class Enemy {
   }
 
   #updatePosition() {
-    this.interval = setInterval(() => this.#setNewPosition(), 10);
+    this.interval = setInterval(
+      () => this.#setNewPosition(),
+      `${this.enemyInterval}`
+    );
   }
 
   #setNewPosition() {
