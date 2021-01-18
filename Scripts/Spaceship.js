@@ -14,6 +14,7 @@ export class Spaceship {
     this.space = ship;
     this.container = container;
   }
+
   start() {
     this.#setPosition();
     this.#shipMove();
@@ -24,15 +25,15 @@ export class Spaceship {
     this.space.classList.remove("hide");
     this.space.style.bottom = "0px";
     this.space.style.left = `${
-      window.innerWidth / 2 - this.#checkPositionX()
+      window.innerWidth / 2 - this.checkPositionX()
     }px`;
   }
 
-  #checkPositionX() {
+  checkPositionX() {
     return this.space.offsetLeft + this.space.offsetWidth / 2;
   }
 
-  #checkPositionY() {
+  checkPositionY() {
     return this.space.offsetTop + this.space.offsetHeight / 2;
   }
 
@@ -80,19 +81,19 @@ export class Spaceship {
   };
 
   #pushKey() {
-    if (this.#shipProperties.leftArrow && this.#checkPositionX() > 0) {
+    if (this.#shipProperties.leftArrow && this.checkPositionX() > 0) {
       this.space.style.left = `${
         parseInt(this.space.style.left, 10) - this.#shipProperties.stepMove
       }px`;
     }
-    if (this.#shipProperties.upArrow && this.#checkPositionY() > 0) {
+    if (this.#shipProperties.upArrow && this.checkPositionY() > 0) {
       this.space.style.bottom = `${
         parseInt(this.space.style.bottom, 10) + this.#shipProperties.stepMove
       }px`;
     }
     if (
       this.#shipProperties.rightArrow &&
-      this.#checkPositionX() < window.innerWidth
+      this.checkPositionX() < window.innerWidth
     ) {
       this.space.style.left = `${
         parseInt(this.space.style.left, 10) + this.#shipProperties.stepMove
@@ -100,7 +101,7 @@ export class Spaceship {
     }
     if (
       this.#shipProperties.downArrow &&
-      this.#checkPositionY() < window.innerHeight
+      this.checkPositionY() < window.innerHeight
     ) {
       this.space.style.bottom = `${
         parseInt(this.space.style.bottom, 10) - this.#shipProperties.stepMove
@@ -110,11 +111,15 @@ export class Spaceship {
 
   #shot() {
     const missile = new Missile(
-      this.#checkPositionX(),
-      this.#checkPositionY(),
+      this.checkPositionX(),
+      this.checkPositionY(),
       this.container
     );
     missile.start();
     this.missiles.push(missile);
+  }
+
+  endGame() {
+    this.container.classList.add("hide");
   }
 }

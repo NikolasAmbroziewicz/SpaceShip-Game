@@ -3,14 +3,14 @@ export class Start {
   #startInfoNumber = 0;
   lives = 3;
   level = 1;
-  score = 9;
-  constructor(container, startInfo) {
+  score = 0;
+  constructor(container, startInfo, gameLives, gameScore, gameLevel, modal) {
     this.container = container;
     this.startInfo = startInfo;
-    this.modal = document.querySelector("[data-modal]");
-    this.gameLives = document.querySelector("[data-lives]");
-    this.gameScore = document.querySelector("[data-score]");
-    this.gameLevel = document.querySelector("[data-level]");
+    this.gameLives = gameLives;
+    this.gameScore = gameScore;
+    this.gameLevel = gameLevel;
+    this.modal = modal;
   }
 
   startGame() {
@@ -27,6 +27,19 @@ export class Start {
       this.gameLevel.classList.remove("hide");
       this.gameLevel.classList.innerHTML = `Level: ${this.level}`;
     }, 3000);
+  }
+
+  endGame() {
+    this.#startInfoNumber = 0;
+    this.gameScore.classList.add("hide");
+    this.gameLives.classList.add("hide");
+    this.gameLevel.classList.add("hide");
+    this.gameLives.classList.innerHTML = ``;
+    this.lives = 3;
+    this.score = 0;
+    this.level = 1;
+    this.#printScore();
+    this.#printLives();
   }
 
   #startAnimation() {
@@ -67,6 +80,4 @@ export class Start {
   #printLives() {
     this.gameLives.innerHTML = `Lives: ${this.lives}`;
   }
-
-  resetGame() {}
 }

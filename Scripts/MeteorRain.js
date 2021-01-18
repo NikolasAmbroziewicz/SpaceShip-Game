@@ -56,8 +56,13 @@ export class MeteorRain {
     } else if (this.sky.classList.contains("meteor")) {
       this.sky.classList.remove("meteor");
       this.sky.classList.add("move");
-      this.#currentMetor = 0;
-      this.#numerOfInformations = 0;
+      this.#resetSettings();
     }
+  }
+
+  #resetSettings() {
+    this.#currentMetor = 0;
+    this.#numerOfInformations = 0;
+    clearInterval(this.interval);
   }
 }

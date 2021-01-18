@@ -141,12 +141,13 @@ div.modal {
   position: fixed;
   width: 192px;
   height: 110px;
-  background-size: cover;
+  box-sizing: border-box;
   border: 1px solid green;
   border-radius: 50% 50% 25% 25%;
   background-image: url("./images/boss.png");
-  animation: boss-animation calc(var(--animation-duration) * 3) linear infinite
-    alternate;
+  animation: boss-animation calc(var(--animation-duration) * 3) infinite
+      alternate,
+    boss-moves 3s infinite linear;
 }
 
 .meteors {
@@ -275,12 +276,10 @@ div.modal {
 
 @keyframes boss-animation {
   0% {
-    width: 192px;
-    height: 100px;
+    border: 1px solid green;
   }
   100% {
-    width: 210px;
-    height: 120px;
+    border: 3px solid red;
   }
 }
 
