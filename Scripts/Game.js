@@ -3,7 +3,7 @@ import { Spaceship } from "./Spaceship.js";
 import { Enemy } from "./Enemy.js";
 import { MeteorRain } from "./MeteorRain.js";
 
-export class Game extends Start {
+export class Game {
   //Properties
   HTMLElements = {
     sky: document.querySelector("[data-sky]"),
@@ -16,7 +16,7 @@ export class Game extends Start {
     modal: document.querySelector("[data-modal]"),
     dataFinalScore: document.querySelector("[data-modal]"),
     dataFinalText: document.querySelector("[data-text]"),
-    buttonResetGame: document.querySelector("[data-modal-button]"),
+    buttonModalGame: document.querySelector("[data-modal-button]"),
   };
   #enemyMoveInterval = 10;
   #checkPositionInterval = null;
@@ -46,11 +46,13 @@ export class Game extends Start {
   );
   //Methods
   startGame() {
-    this.#start.startGame();
-    setTimeout(() => {
-      this.ship.start();
-      this.#newGame();
-    }, 3000);
+    this.HTMLElements.buttonModalGame.addEventListener("click", () => {
+      this.#start.startGame();
+      setTimeout(() => {
+        this.ship.start();
+        this.#newGame();
+      }, 3000);
+    });
   }
 
   #newGame() {
@@ -66,6 +68,7 @@ export class Game extends Start {
     this.HTMLElements.modal.classList.remove("hide");
     this.HTMLElements.dataFinalText.innerHTML = `Game Over!`;
     this.#enemies.forEach((enemy) => enemy.explode());
+    this.HTMLElements.spaceship.classList.add("hide");
     this.#start.endGame();
   }
 
@@ -328,8 +331,7 @@ export class Game extends Start {
   }
 }
 
-const game = new Game();
-
-document.querySelector("[data-modal-button]").addEventListener("click", () => {
+window.onload = () => {
+  const game = new Game();
   game.startGame();
-});
+};

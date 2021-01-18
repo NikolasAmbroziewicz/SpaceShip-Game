@@ -15,11 +15,12 @@ export class Spaceship {
     this.container = container;
   }
 
-  start() {
+  start = () => {
     this.#setPosition();
     this.#shipMove();
     this.#gameLoop();
-  }
+    console.log(`${this.#shipProperties.stepMove}`);
+  };
 
   #setPosition() {
     this.space.classList.remove("hide");
@@ -121,5 +122,6 @@ export class Spaceship {
 
   endGame() {
     this.container.classList.add("hide");
+    this.space.remove();
   }
 }

@@ -34,7 +34,6 @@ export class Start {
     this.gameScore.classList.add("hide");
     this.gameLives.classList.add("hide");
     this.gameLevel.classList.add("hide");
-    this.gameLives.classList.innerHTML = ``;
     this.lives = 3;
     this.score = 0;
     this.level = 1;
