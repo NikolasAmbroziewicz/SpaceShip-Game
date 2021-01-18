@@ -1,6 +1,7 @@
 # Space Ship Game
 
 Simple arcade game, you move by ship and destroy all enemy
+Game is only for desktop
 
 ## Tech Stack
 
