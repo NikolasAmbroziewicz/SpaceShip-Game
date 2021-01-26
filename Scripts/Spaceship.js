@@ -122,6 +122,6 @@ export class Spaceship {
 
   endGame() {
     this.container.classList.add("hide");
-    this.space.remove();
+    this.missiles.length = 0;
   }
 }

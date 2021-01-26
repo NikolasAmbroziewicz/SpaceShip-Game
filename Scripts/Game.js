@@ -14,7 +14,6 @@ export class Game {
     gameScore: document.querySelector("[data-score]"),
     gameLevel: document.querySelector("[data-level]"),
     modal: document.querySelector("[data-modal]"),
-    dataFinalScore: document.querySelector("[data-modal]"),
     dataFinalText: document.querySelector("[data-text]"),
     buttonModalGame: document.querySelector("[data-modal-button]"),
   };
@@ -68,6 +67,7 @@ export class Game {
     this.HTMLElements.modal.classList.remove("hide");
     this.HTMLElements.dataFinalText.innerHTML = `Game Over!`;
     this.#enemies.forEach((enemy) => enemy.explode());
+    this.#enemies.length = 0;
     this.HTMLElements.spaceship.classList.add("hide");
     this.#start.endGame();
   }
@@ -121,6 +121,7 @@ export class Game {
         this.#checkEnemyShot = setInterval(() => {
           this.#enemyMissileMove();
         });
+        this.#bossResp = true;
         this.#createNewEnemy(
           this.HTMLElements.container,
           "boss",
@@ -130,6 +131,7 @@ export class Game {
           this.ship
         );
       } else {
+        this.#bossResp = false;
         let number = Math.floor(Math.random() * 6);
         if (number === 3) {
           this.#createNewEnemy(
@@ -174,9 +176,11 @@ export class Game {
       (this.#start.score > 80 && this.#start.level === 4) ||
       (this.#start.score > 100 && this.#start.level === 5)
     ) {
-      this.#toggleEnemyInterval();
-      this.#meteorRain();
-      this.#enemyMoveInterval--;
+      if (!this.#bossResp) {
+        this.#toggleEnemyInterval();
+        this.#meteorRain();
+        this.#enemyMoveInterval--;
+      }
     } else {
       const enemy = new Enemy(...params);
       enemy.start();
